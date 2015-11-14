@@ -16,7 +16,7 @@ public class KthLargestInSortedMatrix {
 		public int compareTo(V o) { return this.val - o.val; }
 	}
 
-	// Complexity: O(m*nlog(n)) n rows, m columns
+	// Complexity: O(k*log(n)) n rows, kth largest number
 	// Space: O(n)
 	public static int largest(int k, int[][]matrix){
 		PriorityQueue<V> h = new PriorityQueue<>();

@@ -13,8 +13,10 @@ import java.util.*;
 //One character can change at one time and every resulting word 
 //has be a valid word from dictionary
 
-public class TransformationDictionary {
+public class TransformationDictionary {	
 	
+	// Complexity: O(n*m) n words of m letters each
+	// Space: O(n*m) n words of m letters each
 	public static int transform(String start, String end, String[] dictionary) {
 		if (start.length()!=end.length()) return Integer.MAX_VALUE;
 		Map<String,List<String>> dict = new HashMap<>();

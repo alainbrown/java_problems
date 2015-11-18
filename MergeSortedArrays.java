@@ -24,8 +24,8 @@ public class MergeSortedArrays {
 		PriorityQueue<N> h = new PriorityQueue<>();
 		for (int i=0; i< in.length; i++)
 			if (in[i].hasNext()) h.offer(new N(in[i].next(),i));
-		while (!h.isEmpty()) {
-			N n = h.poll();
+		N n = null;
+		while ((n = h.poll()) != null) {
 			out.write(n.val);
 			if (in[n.arr].hasNext()) h.offer(new N(in[n.arr].next(),n.arr));
 		}

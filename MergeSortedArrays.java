@@ -14,20 +14,20 @@ public class MergeSortedArrays {
 			this.val=val;
 			this.arr=arr;
 		}
-		@Override
 		public int compareTo(N o) { return val.compareTo(o.val);}
 	}
 	
 	// Complexity: n*m log(n), for n arrays of length m
 	// Space: O(n)
-	public void merge(Scanner[] in, Writer out) throws IOException {
-		PriorityQueue<N> h = new PriorityQueue<>();
+	public void merge(Scanner[] in, Writer out, String outDelimiter) throws IOException {
+		PriorityQueue<N> h = new PriorityQueue<>(in.length);
 		for (int i=0; i< in.length; i++)
 			if (in[i].hasNext()) h.offer(new N(in[i].next(),i));
 		N n = null;
 		while ((n = h.poll()) != null) {
-			out.write(n.val);
+			out.append(n.val);
 			if (in[n.arr].hasNext()) h.offer(new N(in[n.arr].next(),n.arr));
+			if (!h.isEmpty()) out.append(outDelimiter);
 		}
 	}
 }

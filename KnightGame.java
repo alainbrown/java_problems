@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface KnightGame {
 
-	public BigInteger solve(int i, int j);
+	public BigInteger solve(int start, int digits);
 
 	static class PhonepadKnightGame implements KnightGame {
 

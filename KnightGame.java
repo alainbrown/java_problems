@@ -18,7 +18,7 @@ public class KnightGame {
 	}
 
 	// Complexity: O(n)
-	// Space: O(n)
+	// Space: O(1)
 	public static BigInteger knight(int start, int digits) {
 		if (start<0 || start>9) 
 			throw new IllegalArgumentException("start must be between 0 and 9");

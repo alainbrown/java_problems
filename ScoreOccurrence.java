@@ -11,9 +11,7 @@ public class ScoreOccurrence {
 	public static int occurrence(int[] arr, int score) {
 		int last = lastIndex(arr, score);
 		int first = firstIndex(arr, score);
-		if (last>=0 && last==first) return 1;
-		else if (last<0) return 0;
-		else return last-first;
+		return (last>=0 && last==first) ? 1 : last-first;
 	}
 
 	static int firstIndex(int[] arr, int score) {

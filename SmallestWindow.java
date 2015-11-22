@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 // Given two arrays A [n] and B[m], find the smallest window in
 // A that contains all the elements of B.
@@ -53,6 +51,7 @@ public class SmallestWindow {
 	public static void main(String[] args) {
 		System.out.println(Arrays.toString(
 				smallestWindow(new int []{3,1,7,8,2,8,10,4,11,8,7}, new int []{7,8,8,4})));
+		System.out.println(Arrays.toString(
+				smallestWindow(new int []{3,1,7,8,2,8,10,4,11,8,7}, new int []{7,8,88,4})));
 	}
-
 }

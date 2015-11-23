@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.Stack;
 
 // Find the area of the rectangle of maximal area under a histogram.
 
@@ -8,7 +8,7 @@ public class MaxHistogramRectangle {
 	// Space: O(n)
 	public static long maxArea(int[] hist) {
 		long max_area = 0; int bar = 0, total = hist.length;
-		LinkedList<Integer> st = new LinkedList<>();
+		Stack<Integer> st = new Stack<>();
 		while (bar < total)
 			if (st.isEmpty() || hist[st.peek()] <= hist[bar]) st.push(bar++);
 			else max_area = max_area(hist, max_area, st, bar);
@@ -16,10 +16,8 @@ public class MaxHistogramRectangle {
 		return max_area;
 	}
 
-	private static long max_area(int[] hist, long max_area, LinkedList<Integer> st, int total) {
-		long current_area = hist[st.pop()] * (st.isEmpty() ? total : total - st.peek() - 1);
-		if (max_area < current_area) max_area = current_area;
-		return max_area;
+	private static long max_area(int[] hist, long max_area, Stack<Integer> st, int bar) {
+		return Math.max(max_area, hist[st.pop()]*(st.isEmpty() ? bar : bar-st.peek()-1));
 	}
 
 	public static void main(String[] args) {

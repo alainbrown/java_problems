@@ -1,4 +1,7 @@
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,36 +19,48 @@ import java.util.Map;
 
 public class StreamChecker {
 	
-	static class V {
-		Map<Character,V> children = new HashMap<>();
-		boolean word;
+	private final C root;
+	
+	public StreamChecker(String [] words) {
+		this.root = new C();
+		for (String word: words) root.insert(word);
+	}
+	
+	// Complexity: O(n) constant check for each char in stream, n chars
+	// Space: O(m) m words
+	public void contains(InputStream stream) throws IOException {
+		int i;
+		char c;
+		C last = root;
+		while ((i= stream.read()) != -1) {
+			c = (char)i;
+			if (last.children.containsKey(c)) last = last.children.get(c);
+			else last=root;
+			if (last.word!=null) callAPI(last.word);
+		}
+	}
+
+	static class C {
+		Map<Character,C> children = new HashMap<>();
+		String word;
 		
-		void insert(String word){ insert(word,0);}
+		void insert(String word){ this.insert(word,0);}
 		
 		void insert(String word, int index) {
 			if (index < word.length()) {
-				if (index==word.length()-1) this.word=true;
+				if (index==word.length()-1) this.word=word;
 				char c = word.charAt(index);
-				if (!children.containsKey(c)) children.put(c, new V());
+				if (!children.containsKey(c)) children.put(c, new C());
 				children.get(c).insert(word,index+1);
 			}
 		}
 	}
-
-	public static void callAPI(){}
 	
-	// Complexity: O(1) constant check for each char in stream
-	// Space: O(n) n words
-	public void contains(String[] words, InputStream stream) throws Exception {
-		V root = new V();
-		for (String word: words) root.insert(word);
-		
-		char c = 0;
-		V last = root;
-		while ((c=(char) stream.read()) != -1) {
-			if (last.word) callAPI();
-			if (last.children.containsKey(c)) last = last.children.get(c);
-			else last=root;
-		}
+	public static void callAPI(String word){System.out.println(word);}
+
+	public static void main(String [] args) throws Exception {
+		InputStream stream = new ByteArrayInputStream("abcokdeftrying".getBytes(StandardCharsets.UTF_8));
+		StreamChecker checker = new StreamChecker(new String[]{"ok","test","one","try","trying"});
+		checker.contains(stream);
 	}
 }
